@@ -409,7 +409,7 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             z-index: 1000;
             background: rgba(26, 26, 26, 0.9);
             padding: 1rem;
@@ -426,6 +426,9 @@
             cursor: pointer;
             font-family: 'Minecraft', sans-serif;
             transition: all 0.3s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+            min-width: 0; /* Allow button to shrink */
+            flex: 0 1 auto; /* Don't allow button to grow */
         }
 
         .category-btn:hover {
@@ -949,6 +952,132 @@
         }
 
         /* Fix for iOS Safari height issues */
+        @supports (-webkit-touch-callout: none) {
+            .category-content {
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Base styles update */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .category-content {
+            min-height: 100vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            /* Enable scrolling */
+            body, #about, #server, #clublands, #mcserverhost {
+                overflow-y: auto !important;
+                position: relative !important;
+                height: auto !important;
+            }
+
+            /* Category buttons */
+            .categories {
+                position: fixed;
+                top: 10px;
+                width: 90%;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                background: rgba(26, 26, 26, 0.95);
+                z-index: 1000;
+            }
+
+            .category-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
+                flex: 1 1 auto;
+                min-width: auto;
+            }
+
+            /* Content scaling */
+            .hero {
+                padding-top: 80px; /* Space for category buttons */
+                min-height: 100vh;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .about-me, .server-info {
+                width: 90%;
+                margin: 1rem auto;
+                padding: 1.2rem;
+            }
+
+            /* Skills and features */
+            .skills {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .skill-tag {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            /* Server section specific */
+            .server-ip {
+                font-size: 1rem;
+                padding: 1rem;
+                word-break: break-all;
+            }
+
+            .server-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Small screen adjustments */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .category-btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+
+            .about-me, .server-info {
+                padding: 1rem;
+            }
+        }
+
+        /* Height-based adjustments */
+        @media (max-height: 700px) {
+            .hero {
+                padding-top: 70px;
+            }
+
+            .about-me, .server-info {
+                margin: 0.8rem auto;
+            }
+        }
+
+        /* Fix for iOS Safari */
         @supports (-webkit-touch-callout: none) {
             .category-content {
                 min-height: -webkit-fill-available;
