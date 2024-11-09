@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limelio | WakedSMP Co-Owner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #32CD32;
+            border-radius: 10px;
+            border: 3px solid #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #28a428;
+        }
+
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #32CD32 #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Minecraft', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 100px; /* Add space for the fixed category bar */
+        }
+
+        .hero {
+            min-height: calc(100vh - 100px); /* Adjust for the fixed header */
+            padding-top: 0; /* Remove existing padding */
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #32CD32;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .server-info {
+            background-color: #242424;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .server-info h2 {
+            color: #32CD32;
+            margin-bottom: 1rem;
+        }
+
+        .server-ip {
+            background-color: #333;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-family: 'Minecraft', monospace;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 1.25rem;
+            letter-spacing: 1px;
+        }
+
+        .server-ip:hover {
+            transform: scale(1.02);
+            background-color: #404040;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: #32CD32;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            background-color: #242424;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+            background-color: #32CD32;
+            transform: translateY(-2px);
+        }
+
+        .about-me {
+            background-color: #242424;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            animation: fadeIn 1.5s ease-in;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .about-me h2 {
+            color: #32CD32;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .about-me p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background-color: #333;
+            color: #32CD32;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background-color: #404040;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: -100px; /* Start off-screen */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #32CD32;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: top 0.3s ease-in-out;
+            z-index: 1000;
+            font-family: 'Minecraft', sans-serif;
+        }
+
+        .notification.show {
+            top: 20px;
+        }
+
+        /* Add this @font-face rule at the top of your CSS */
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/font/minecraft.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/font/minecraft.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Add these new styles */
+        .server-features {
+            background-color: #333;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .server-features h3 {
+            color: #32CD32;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .server-features ul {
+            list-style: none;
+        }
+
+        .server-features li {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .server-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            color: #32CD32;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #a0a0a0;
+        }
+
+        /* Add these new styles */
+        .server-rules, .staff-team, .server-events, .custom-features, .community-links {
+            background-color: #242424;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .server-rules h3, .staff-team h3, .server-events h3, .custom-features h3, .community-links h3 {
+            color: #32CD32;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .server-rules ul, .staff-team ul, .server-events ul, .custom-features ul, .community-links ul {
+            list-style: none;
+        }
+
+        .server-rules li, .staff-team li, .server-events li, .custom-features li, .community-links li {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .staff-member {
+            background: #333;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .staff-member .role {
+            color: #32CD32;
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .feature {
+            background: #333;
+            padding: 1.5rem;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature h4 {
+            color: #32CD32;
+            margin-bottom: 0.5rem;
+        }
+
+        .community-links .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .community-link {
+            background: #333;
+            padding: 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .community-link:hover {
+            transform: translateY(-5px);
+            background: #32CD32;
+        }
+
+        .member-count, .store-info {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        /* Add these new styles */
+        .categories {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .category-btn {
+            background: #242424;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Minecraft', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background: #32CD32;
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: #32CD32;
+        }
+
+        .category-content {
+            display: none;
+            height: 100vh;
+        }
+
+        .category-content.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Update these styles */
+        #about {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #about .hero {
+            height: auto;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        #about .hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        #about .hero p {
+            font-size: 1.4rem;
+            margin: 0;
+            animation: slideIn 0.8s ease-out 0.1s backwards;
+        }
+
+        #about .about-me {
+            width: 90%;
+            max-width: 700px;
+            margin: 0;
+            padding: 1.5rem;
+            background-color: #242424;
+            border-radius: 10px;
+            animation: slideIn 0.8s ease-out 0.2s backwards;
+        }
+
+        #about .about-me h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: #32CD32;
+        }
+
+        #about .about-me p {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        #about .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            animation: fadeIn 0.8s ease-out 0.3s backwards;
+        }
+
+        #about .skill-tag {
+            padding: 0.4rem 0.8rem;
+            font-size: 1rem;
+            border-radius: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #about .skill-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            background-color: #404040;
+        }
+
+        /* Keep the server category scrollable */
+        #server {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Add hover animations to buttons */
+        .category-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(50, 205, 50, 0.2);
+        }
+
+        .category-btn.active {
+            background: #32CD32;
+            transform: scale(1.05);
+        }
+
+        /* Add animations to elements within categories */
+        .hero h1 {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .hero p {
+            animation: slideIn 0.8s ease-out 0.1s backwards;
+        }
+
+        .about-me, .server-info {
+            animation: slideIn 0.8s ease-out 0.2s backwards;
+        }
+
+        .skills {
+            animation: fadeIn 0.8s ease-out 0.3s backwards;
+        }
+
+        .skill-tag {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px) scale(1.05);
+            background-color: #404040;
+        }
+
+        /* Enhanced animation keyframes */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Category transitions */
+        .category-content {
+            display: none;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .category-content.active {
+            display: block;
+            opacity: 1;
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Enhanced button animations */
+        .category-btn {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(50, 205, 50, 0.25);
+        }
+
+        .category-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .category-btn.active {
+            background: #32CD32;
+            transform: scale(1.08);
+        }
+
+        /* Content animations */
+        .hero h1 {
+            animation: slideInRight 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hero p {
+            animation: slideInRight 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s backwards;
+        }
+
+        .about-me, .server-info {
+            animation: scaleIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s backwards;
+        }
+
+        .skills {
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s backwards;
+        }
+
+        /* Enhanced skill tag animations */
+        .skill-tag {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-3px) scale(1.1);
+            background-color: #404040;
+            box-shadow: 0 4px 12px rgba(50, 205, 50, 0.2);
+        }
+
+        /* Add smooth transition for text elements */
+        h1, h2, h3, p {
+            transition: all 0.4s ease-in-out;
+        }
+
+        /* Add these styles for smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add reveal animations for content as you scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Optional: Add a smooth parallax effect */
+        .parallax {
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* For Safari and iOS support */
+        body {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Optional: Make scrolling even smoother with custom scroll snapping */
+        #server {
+            scroll-snap-type: y proximity;
+        }
+
+        .section {
+            scroll-snap-align: start;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <div class="categories">
+        <button class="category-btn active" onclick="showCategory('about')">About Me</button>
+        <button class="category-btn" onclick="showCategory('server')">WakedSMP</button>
+    </div>
+
+    <div id="about" class="category-content active">
+        <div class="container">
+            <section class="hero">
+                <h1>Limelio</h1>
+                <p>Co-Owner of WakedSMP</p>
+                
+                <div class="about-me">
+                    <h2>About Me</h2>
+                    <p>Hey there! I'm a 13-year-old developer with a passion for creating awesome things on the web and Discord. When I'm not managing WakedSMP, you can find me chilling or playing Fortnite, or maybe just working on other things.</p>
+                    
+                    <p>I'm known for being a friendly and approachable person, always ready to help others in the community. My favorite color is Lime (as you might have guessed), and it reflects my bright and energetic personality!</p>
+                    
+                    <div class="skills">
+                        <div class="skill-tag">HTML Developer</div>
+                        <div class="skill-tag">Discord Bot Developer</div>
+                        <div class="skill-tag">Server Management</div>
+                        <div class="skill-tag">Community Building</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="server" class="category-content">
+        <div class="container">
+            <section class="hero parallax" data-speed="0.3">
+                <h1>WakedSMP</h1>
+                <p>A unique Lifesteal Minecraft server experience</p>
+            </section>
+            
+            <div class="server-info reveal">
+                <h2>WakedSMP</h2>
+                <p>A unique Lifesteal Minecraft server experience</p>
+                
+                <div class="server-features">
+                    <h3>Server Features</h3>
+                    <ul>
+                        <li>🫀 Lifesteal System - PvP for hearts!</li>
+                        <li>⚔️ Custom Items & Enchants</li>
+                        <li>🏰 Player-driven Economy</li>
+                        <li>🤝 Active Community</li>
+                        <li>🎮 1.14x-1.21x Version</li>
+                    </ul>
+                </div>
+                
+                <div class="server-ip" onclick="copyIP()">
+                    wakedsmp.com
+                </div>
+                <p>Click to copy server IP</p>
+                
+                <div class="server-stats">
+                    <div class="stat">
+                        <span class="stat-number">40+</span>
+                        <span class="stat-label">Player Base</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Online Time</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="staff-team reveal">
+                <h2>Management Team</h2>
+                <div class="staff-grid">
+                    <div class="staff-member">
+                        <span class="role">Owner</span>
+                        <span class="name">IQsm</span>
+                    </div>
+                    <div class="staff-member">
+                        <span class="role">Co-Owner</span>
+                        <span class="name">Limelio</span>
+                    </div>
+                    <div class="staff-member">
+                        <span class="role">Manager</span>
+                        <span class="name">Voxilityyy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-links reveal">
+                <h2>Join Our Community</h2>
+                <div class="links-grid">
+                    <a href="https://discord.gg/waked" class="community-link discord">
+                        <span>Discord Community</span>
+                        <span class="member-count">1000+ Members</span>
+                    </a>
+                    <a href="https://store.wakedsmp.com" class="community-link store">
+                        <span>Server Store</span>
+                        <span class="store-info">Support the Server</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">IP copied to clipboard!</div>
+
+    <!-- Add this script right before the closing </body> tag -->
+    <script>
+        function showCategory(categoryId) {
+            // Smooth fade out for current category
+            document.querySelectorAll('.category-content.active').forEach(content => {
+                content.style.opacity = '0';
+                setTimeout(() => {
+                    content.style.display = 'none';
+                    content.classList.remove('active');
+                }, 300);
+            });
+            
+            // Remove active class from buttons with animation
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show new category with animation
+            setTimeout(() => {
+                const selectedCategory = document.getElementById(categoryId);
+                selectedCategory.style.display = 'block';
+                
+                // Force reflow
+                selectedCategory.offsetHeight;
+                
+                selectedCategory.classList.add('active');
+                selectedCategory.style.opacity = '1';
+                
+                // Animate button
+                document.querySelector(`[onclick="showCategory('${categoryId}')"]`).classList.add('active');
+            }, 300);
+
+            // Smooth scroll to top for server category
+            if (categoryId === 'server') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add click event listeners to all category buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const categoryId = this.getAttribute('onclick').match(/'(.*?)'/)[1];
+                    showCategory(categoryId);
+                });
+            });
+        });
+
+        // Add this to your existing JavaScript
+        // Smooth reveal on scroll
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150; // Adjust this value to change when elements start appearing
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Optional: Simple parallax effect
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                const yPos = -(window.pageYOffset * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Call reveal on load
+        reveal();
+
+        // Add smooth scrolling to all scrollable elements
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Optional: Custom smooth scroll function for better control
+        function smoothScroll() {
+            let currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            let targetScroll = currentScroll;
+
+            window.addEventListener('wheel', (e) => {
+                targetScroll = Math.max(0, Math.min(targetScroll + e.deltaY, 
+                    document.documentElement.scrollHeight - window.innerHeight));
+                e.preventDefault();
+            }, { passive: false });
+
+            function animate() {
+                currentScroll += (targetScroll - currentScroll) * 0.1;
+                document.documentElement.scrollTop = document.body.scrollTop = currentScroll;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Initialize smooth scroll
+        smoothScroll();
+    </script>
+</body>
+</html>
