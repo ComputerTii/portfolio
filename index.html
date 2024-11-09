@@ -856,6 +856,104 @@
             position: relative !important;
             overflow-y: auto !important;
         }
+
+        /* Add these media queries for mobile responsiveness */
+        @media (max-width: 768px) {
+            /* Category buttons */
+            .categories {
+                padding: 0.5rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                width: 95%;
+                justify-content: center;
+            }
+
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            /* Content scaling */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            /* About section */
+            .about-me {
+                width: 90%;
+                padding: 1.5rem;
+            }
+
+            .skills {
+                gap: 0.5rem;
+            }
+
+            .skill-tag {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            /* Server section */
+            .server-info {
+                padding: 1.5rem;
+            }
+
+            .server-ip {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+
+            .server-stats {
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            /* Staff team */
+            .staff-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            /* Community links */
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Copy notification */
+            .copy-notification {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Additional fixes for very small screens */
+        @media (max-width: 380px) {
+            .categories {
+                top: 10px;
+            }
+
+            .category-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Fix for iOS Safari height issues */
+        @supports (-webkit-touch-callout: none) {
+            .category-content {
+                min-height: -webkit-fill-available;
+            }
+        }
     </style>
 </head>
 <body>
@@ -870,7 +968,6 @@
     <div id="about" class="category-content active">
         <div class="hero">
             <h1>Limelio</h1>
-            <p>Co-Owner of WakedSMP</p>
             
             <div class="about-me">
                 <h2>About Me</h2>
