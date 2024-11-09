@@ -741,6 +741,8 @@
     <div class="categories">
         <button class="category-btn active" onclick="showCategory('about')">About Me</button>
         <button class="category-btn" onclick="showCategory('server')">WakedSMP</button>
+        <button class="category-btn" onclick="showCategory('clublands')">Clublands</button>
+        <button class="category-btn" onclick="showCategory('mcserverhost')">MCServerHost</button>
     </div>
 
     <div id="about" class="category-content active">
@@ -839,47 +841,68 @@
         </div>
     </div>
 
+    <div id="clublands" class="category-content">
+        <div class="hero">
+            <h1>Clublands</h1>
+            <p>A Minecraft Server Network in Development</p>
+            
+            <div class="about-me">
+                <h2>Coming Soon</h2>
+                <p>A revolutionary Minecraft network featuring multiple unique game modes and experiences.</p>
+                
+                <h3>Planned Features</h3>
+                <div class="skills">
+                    <span class="skill-tag">Multiple Game Modes</span>
+                    <span class="skill-tag">Unique Minigames</span>
+                    <span class="skill-tag">Competitive Rankings</span>
+                    <span class="skill-tag">Community Events</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mcserverhost" class="category-content">
+        <div class="hero">
+            <h1>MCServerHost</h1>
+            <p>Premium Minecraft Server Hosting Solutions</p>
+            
+            <div class="about-me">
+                <h2>Coming Soon</h2>
+                <p>Professional Minecraft server hosting with unmatched performance and support.</p>
+                
+                <h3>Planned Features</h3>
+                <div class="skills">
+                    <span class="skill-tag">High-Performance Servers</span>
+                    <span class="skill-tag">DDoS Protection</span>
+                    <span class="skill-tag">Easy Management</span>
+                    <span class="skill-tag">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="notification" id="notification">IP copied to clipboard!</div>
 
     <!-- Add this script right before the closing </body> tag -->
     <script>
         function showCategory(categoryId) {
-            // Smooth fade out for current category
-            document.querySelectorAll('.category-content.active').forEach(content => {
-                content.style.opacity = '0';
-                setTimeout(() => {
-                    content.style.display = 'none';
-                    content.classList.remove('active');
-                }, 300);
+            // Hide all categories
+            document.querySelectorAll('.category-content').forEach(content => {
+                content.style.display = 'none';
+                content.classList.remove('active');
             });
             
-            // Remove active class from buttons with animation
+            // Remove active class from all buttons
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Show new category with animation
-            setTimeout(() => {
-                const selectedCategory = document.getElementById(categoryId);
-                selectedCategory.style.display = 'block';
-                
-                // Force reflow
-                selectedCategory.offsetHeight;
-                
-                selectedCategory.classList.add('active');
-                selectedCategory.style.opacity = '1';
-                
-                // Animate button
-                document.querySelector(`[onclick="showCategory('${categoryId}')"]`).classList.add('active');
-            }, 300);
-
-            // Smooth scroll to top for server category
-            if (categoryId === 'server') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
+            // Show selected category
+            document.getElementById(categoryId).style.display = 'block';
+            document.getElementById(categoryId).classList.add('active');
+            
+            // Add active class to clicked button
+            document.querySelector(`[onclick="showCategory('${categoryId}')"]`).classList.add('active');
         }
 
         // Add click event listeners to all category buttons
