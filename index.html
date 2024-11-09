@@ -969,8 +969,12 @@
 
         .category-content {
             min-height: 100vh;
+            width: 100%;
+            position: absolute; /* Change from fixed to absolute */
+            top: 0;
+            left: 0;
             overflow-y: auto;
-            position: relative;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Responsive styles */
@@ -1080,6 +1084,63 @@
         /* Fix for iOS Safari */
         @supports (-webkit-touch-callout: none) {
             .category-content {
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Base fixes for mobile scrolling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        .category-content {
+            min-height: 100vh;
+            width: 100%;
+            position: absolute; /* Change from fixed to absolute */
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Mobile-specific fixes */
+        @media (max-width: 768px) {
+            body, html {
+                position: relative;
+                overflow-y: auto !important;
+            }
+
+            .category-content {
+                position: relative !important; /* Important to enable proper scrolling */
+                height: auto !important;
+                min-height: 100vh;
+                overflow-y: auto !important;
+            }
+
+            #about, #server, #clublands, #mcserverhost {
+                overflow-y: auto !important;
+                position: relative !important;
+                height: auto !important;
+            }
+
+            .hero {
+                padding-top: 100px; /* Space for fixed category buttons */
+                min-height: calc(100vh - 100px);
+            }
+        }
+
+        /* Fix for iOS Safari */
+        @supports (-webkit-touch-callout: none) {
+            .category-content {
+                min-height: -webkit-fill-available;
+            }
+            
+            .hero {
                 min-height: -webkit-fill-available;
             }
         }
