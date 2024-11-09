@@ -856,6 +856,86 @@
             position: relative !important;
             overflow-y: auto !important;
         }
+
+        /* Add these loading screen styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #1a1a1a;
+            border-top: 3px solid #32CD32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .loading-message {
+            color: #32CD32;
+            font-size: 1.2rem;
+            font-family: 'Minecraft', sans-serif;
+            text-align: center;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none;
+        }
+
+        /* Add content load animation */
+        .content-loaded .hero h1 {
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .content-loaded .about-me {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
@@ -1004,6 +1084,12 @@
 
     <div class="notification" id="notification">IP copied to clipboard!</div>
 
+    <!-- Add this right after <body> -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+        <div class="loading-message"></div>
+    </div>
+
     <!-- Add this script right before the closing </body> tag -->
     <script>
         function showCategory(categoryId) {
@@ -1124,6 +1210,104 @@
                 notification.remove();
             }, 3000);
         }
+
+        // Add this to your existing JavaScript
+        const funMessages = [
+            "Did you poop today? 💩",
+            "Loading more lime... 🟢",
+            "Stealing your cookies... 🍪",
+            "Making things green... 🌿",
+            "Are you winning son? 🎮",
+            "Touch grass please... 🌱",
+            "Drinking water? Stay hydrated! 💧",
+            "Did you do your homework? 📚",
+            "Your PC has virus jk... 🦠",
+            "Loading Minecraft... ⛏️",
+            "Deleting System32... JK! 🗑️",
+            "Have you slept today? 😴",
+            "Downloading more RAM... 💾",
+            "Making things lime-er... 🟩",
+            "Feeding the server hamsters... 🐹",
+            "Calculating meaning of life... 🤔",
+            "Mining some diamonds... 💎",
+            "Spawning some creepers... 💥",
+            "Looking for who asked... 🔍",
+            "Taking an arrow to the knee... 🏹",
+            "Rolling the dice... 🎲",
+            "Checking your browser history... 👀",
+            "Stealing your diamonds... 💎",
+            "Finding Herobrine... 👻",
+            "Touching some grass... 🌱",
+            "Making dad jokes... 👨",
+            "Asking your mom... 🤷‍♀️",
+            "Loading pixel by pixel... 🖥️",
+            "Generating random excuse... 📝",
+            "Counting to potato... 🥔"
+        ];
+
+        const finalMessages = [
+            "Almost there...",
+            "Loading complete!"
+        ];
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const loadingMessage = document.querySelector('.loading-message');
+            
+            // Create a copy of messages array to remove used messages
+            let availableMessages = [...funMessages];
+            
+            function getRandomMessage() {
+                if (availableMessages.length === 0) {
+                    availableMessages = [...funMessages]; // Reset if all messages were used
+                }
+                const randomIndex = Math.floor(Math.random() * availableMessages.length);
+                const message = availableMessages[randomIndex];
+                // Remove used message
+                availableMessages.splice(randomIndex, 1);
+                return message;
+            }
+
+            // Initial message
+            loadingMessage.textContent = getRandomMessage();
+
+            // Random messages for first 7 seconds
+            const messageInterval = setInterval(() => {
+                loadingMessage.style.opacity = '0';
+                setTimeout(() => {
+                    loadingMessage.textContent = getRandomMessage();
+                    loadingMessage.style.opacity = '1';
+                }, 200);
+            }, 1500);
+
+            // Final messages sequence (starts at 7 seconds)
+            setTimeout(() => {
+                clearInterval(messageInterval);
+                let finalIndex = 0;
+                
+                const finalSequence = setInterval(() => {
+                    loadingMessage.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingMessage.textContent = finalMessages[finalIndex];
+                        loadingMessage.style.opacity = '1';
+                        finalIndex++;
+                    }, 200);
+                    
+                    if (finalIndex >= finalMessages.length) {
+                        clearInterval(finalSequence);
+                    }
+                }, 1000); // Each final message lasts 1 second
+            }, 7000);
+
+            // Final animation and removal (at 9 seconds)
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                document.body.classList.add('content-loaded');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 800);
+            }, 10000);
+        });
     </script>
 </body>
 </html>
