@@ -1231,6 +1231,68 @@
                 scroll-behavior: auto;
             }
         }
+
+        /* Base styles */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Desktop scrollbar (only show on WakedSMP) */
+        @media (min-width: 769px) {
+            #server {
+                scrollbar-width: thin;
+                scrollbar-color: #32CD32 #1a1a1a;
+            }
+
+            #server::-webkit-scrollbar {
+                width: 12px;
+                display: block;
+            }
+
+            #server::-webkit-scrollbar-track {
+                background: #1a1a1a;
+                border-radius: 10px;
+            }
+
+            #server::-webkit-scrollbar-thumb {
+                background: #32CD32;
+                border-radius: 10px;
+                border: 3px solid #1a1a1a;
+            }
+
+            /* Hide scrollbar for other sections on desktop */
+            #about::-webkit-scrollbar,
+            #clublands::-webkit-scrollbar,
+            #mcserverhost::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            /* Remove all custom scrollbar styling on mobile */
+            body, .category-content, #server, #about, #clublands, #mcserverhost {
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+                -webkit-overflow-scrolling: touch;
+                overflow-y: auto !important;
+                scroll-behavior: auto !important;
+            }
+
+            /* Hide all custom scrollbars on mobile */
+            body::-webkit-scrollbar,
+            .category-content::-webkit-scrollbar,
+            #server::-webkit-scrollbar,
+            #about::-webkit-scrollbar,
+            #clublands::-webkit-scrollbar,
+            #mcserverhost::-webkit-scrollbar {
+                display: none !important;
+                width: 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
