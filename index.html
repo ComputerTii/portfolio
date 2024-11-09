@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limelio | WakedSMP Co-Owner</title>
+    <title>Limelio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304895840829313094/limelopfprender1.png?ex=67310e74&is=672fbcf4&hm=a4ea6821c50a2294e699a74152204adc54a30e0af757512fcdb6d8856d2a899c&">
+    <link rel="apple-touch-icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304894840701718571/limelopfprender2.png?ex=67310d85&is=672fbc05&hm=5cecebe9badc8aae0a87c84a0f77890f51d947bacbf822089ae4180dfb63c7a0&">
+    <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304895840829313094/limelopfprender1.png?ex=67310e74&is=672fbcf4&hm=a4ea6821c50a2294e699a74152204adc54a30e0af757512fcdb6d8856d2a899c&">
     <style>
         /* Custom Scrollbar Styling */
         ::-webkit-scrollbar {
@@ -699,6 +702,38 @@
         .section {
             scroll-snap-align: start;
         }
+
+        /* Add notification styles */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #32CD32;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            z-index: 1000;
+            animation: slideDown 0.3s ease, fadeOut 0.3s ease 2.7s;
+            font-family: 'Minecraft', sans-serif;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -921,6 +956,22 @@
 
         // Initialize smooth scroll
         smoothScroll();
+
+        function copyIP() {
+            // Copy the IP to clipboard
+            navigator.clipboard.writeText('wakedsmp.com');
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'copy-notification';
+            notification.textContent = 'IP copied to clipboard!';
+            document.body.appendChild(notification);
+            
+            // Remove notification after animation
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
     </script>
 </body>
 </html>
