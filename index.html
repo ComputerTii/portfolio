@@ -69,7 +69,7 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
-            padding-top: 100px; /* Add space for the fixed category bar */
+            padding-top: 120px; /* Increase padding to prevent overlap */
         }
 
         .hero {
@@ -475,11 +475,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding-top: 80px; /* Add padding to move content down */
         }
 
         #about .hero {
             height: auto;
-            padding-top: 60px;
+            padding-top: 0; /* Remove existing padding */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1079,14 +1080,6 @@
 
         :root {
             overscroll-behavior: none;
-        }
-
-        html {
-            scroll-behavior: auto;
-            overscroll-behavior: none;
-            height: 100%;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
