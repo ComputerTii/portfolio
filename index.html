@@ -823,9 +823,10 @@
 
         /* Fix for About Me category */
         #about {
-            scrollbar-width: none !important;
-            -ms-overflow-style: none !important;
             overflow: hidden !important;
+            height: 100vh !important;
+            position: fixed !important;
+            width: 100% !important;
         }
 
         #about::-webkit-scrollbar {
@@ -835,13 +836,8 @@
 
         /* Keep WakedSMP scrollbar */
         #server {
-            scrollbar-width: thin !important;
-            -ms-overflow-style: auto !important;
-        }
-
-        #server::-webkit-scrollbar {
-            display: block !important;
-            width: 12px;
+            position: relative !important;
+            overflow-y: auto !important;
         }
 
         /* Hide scrollbar for About Me category */
@@ -1202,6 +1198,51 @@
         #about .hero h1 {
             font-size: 3.5rem;
             margin: 0;
+        }
+
+        /* Hide scrollbar for About Me category */
+        #about {
+            overflow: hidden !important;
+            height: 100vh !important;
+            position: fixed !important;
+            width: 100% !important;
+        }
+
+        #about::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        /* Keep scrollbar for WakedSMP only */
+        #server {
+            position: relative !important;
+            overflow-y: auto !important;
+        }
+
+        /* Fix for Clublands and MCServerHost */
+        #clublands, #mcserverhost {
+            overflow: hidden !important;
+            height: 100vh !important;
+            position: fixed !important;
+            width: 100% !important;
+        }
+
+        #clublands::-webkit-scrollbar,
+        #mcserverhost::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        /* Update category content base styles */
+        .category-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category-content.active {
+            display: block;
+            opacity: 1;
         }
     </style>
 </head>
