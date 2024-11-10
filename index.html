@@ -409,16 +409,17 @@
         /* Add these new styles */
         .categories {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px; /* Fixed height for category selector */
             display: flex;
             gap: 1rem;
             z-index: 1000;
-            background: rgba(26, 26, 26, 0.9);
+            background: rgba(26, 26, 26, 0.95);
             padding: 1rem;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
+            justify-content: center;
+            backdrop-filter: blur(8px);
         }
 
         .category-btn {
@@ -470,68 +471,68 @@
 
         /* Update these styles */
         #about {
-            height: 100vh;
+            height: calc(100vh - 70px); /* Subtract the height of category selector */
+            margin-top: 70px; /* Add margin equal to category selector height */
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 80px; /* Add padding to move content down */
+            position: relative;
         }
 
         #about .hero {
             height: auto;
-            padding-top: 0; /* Remove existing padding */
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
+            padding: 15px;
         }
 
         #about .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin: 0;
-            animation: slideIn 0.8s ease-out;
         }
 
         #about .hero p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin: 0;
-            animation: slideIn 0.8s ease-out 0.1s backwards;
         }
 
         #about .about-me {
             width: 90%;
-            max-width: 700px;
+            max-width: 600px;
             margin: 0;
-            padding: 1.5rem;
+            padding: 1.2rem;
             background-color: #242424;
             border-radius: 10px;
             animation: slideIn 0.8s ease-out 0.2s backwards;
         }
 
         #about .about-me h2 {
-            font-size: 1.6rem;
-            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
             color: #32CD32;
         }
 
         #about .about-me p {
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
         }
 
         #about .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
             animation: fadeIn 0.8s ease-out 0.3s backwards;
         }
 
         #about .skill-tag {
-            padding: 0.4rem 0.8rem;
-            font-size: 1rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
             border-radius: 20px;
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
@@ -1081,6 +1082,98 @@
         :root {
             overscroll-behavior: none;
         }
+
+        /* Add padding to all category content sections */
+        .category-content {
+            padding-top: 70px; /* Adjust this value based on your category selector height */
+            position: relative;
+            width: 100%;
+        }
+
+        /* Specific adjustment for the about section */
+        #about {
+            padding-top: 70px; /* Match the category-content padding */
+        }
+
+        /* Update container padding */
+        .container {
+            padding-top: 70px; /* Match the category-content padding */
+        }
+
+        /* Update styles for Clublands and MCServerHost */
+        #clublands .hero,
+        #mcserverhost .hero {
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 15px;
+        }
+
+        #clublands .hero h1,
+        #mcserverhost .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        #clublands .hero p,
+        #mcserverhost .hero p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        #clublands .about-me,
+        #mcserverhost .about-me {
+            width: 90%;
+            max-width: 600px;
+            margin: 0;
+            padding: 1.2rem;
+            background-color: #242424;
+            border-radius: 10px;
+        }
+
+        #clublands .about-me h2,
+        #mcserverhost .about-me h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #32CD32;
+        }
+
+        #clublands .about-me p,
+        #mcserverhost .about-me p {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        #clublands .skills,
+        #mcserverhost .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+        }
+
+        #clublands .skill-tag,
+        #mcserverhost .skill-tag {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.9rem;
+            border-radius: 20px;
+        }
+
+        /* Add height calculation for these sections */
+        #clublands,
+        #mcserverhost {
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -1095,13 +1188,11 @@
     <div id="about" class="category-content active">
         <div class="hero">
             <h1>Limelio</h1>
-            <p>Co-Owner of WakedSMP</p>
-            
             <div class="about-me">
                 <h2>About Me</h2>
-                <p>Hey there! I'm a 13-year-old developer with a passion for creating awesome things on the web and Discord. When I'm not managing WakedSMP, you can find me chilling or playing Fortnite, or maybe just working on other things.</p>
+                <p>Hey there! I'm a 13-year-old developer with a passion for creating awesome things on the web and Discord. When I'm not in WakedSMP, you can find me chilling or playing or just working on other things.</p>
                 
-                <p>I'm known for being a friendly and approachable person, always ready to help others in the community. My favorite color is Lime (as you might have guessed), and it reflects my bright and energetic personality!</p>
+                <p>I'm known for being a friendly and approachable person, always ready to help others in the community.</p>
                 
                 <h3>My Skills</h3>
                 <div class="skills">
