@@ -12,6 +12,10 @@
     <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304895840829313094/limelopfprender1.png?ex=67310e74&is=672fbcf4&hm=a4ea6821c50a2294e699a74152204adc54a30e0af757512fcdb6d8856d2a899c&">
     <link rel="apple-touch-icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304894840701718571/limelopfprender2.png?ex=67310d85&is=672fbc05&hm=5cecebe9badc8aae0a87c84a0f77890f51d947bacbf822089ae4180dfb63c7a0&">
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/793054013427941387/1304895840829313094/limelopfprender1.png?ex=67310e74&is=672fbcf4&hm=a4ea6821c50a2294e699a74152204adc54a30e0af757512fcdb6d8856d2a899c&">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a1a">
     <style>
         /* Custom Scrollbar Styling */
         ::-webkit-scrollbar {
@@ -936,6 +940,141 @@
         .loading-screen.fade-out {
             opacity: 0;
         }
+
+        /* Update About Me animations to match Clublands */
+        #about .hero h1 {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        #about .hero p {
+            animation: slideIn 0.8s ease-out 0.1s backwards;
+        }
+
+        #about .about-me {
+            animation: slideIn 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Remove the old animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Add/update these mobile-specific styles */
+        @media (max-width: 768px) {
+            .categories {
+                padding: 0.5rem;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 95%;
+            }
+
+            .category-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-me, .server-info {
+                padding: 1.5rem;
+            }
+
+            .server-ip {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .staff-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            /* Fix for iOS Safari bounce effect */
+            html {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            body {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Fix for iOS Safari notch */
+            @supports (padding-top: env(safe-area-inset-top)) {
+                .categories {
+                    padding-top: calc(env(safe-area-inset-top) + 0.5rem);
+                }
+
+                .container {
+                    padding-top: calc(100px + env(safe-area-inset-top));
+                }
+            }
+
+            /* Improve touch targets */
+            .category-btn, 
+            .server-ip, 
+            .social-links a,
+            .community-link {
+                min-height: 44px; /* iOS minimum touch target size */
+                min-width: 44px;
+            }
+
+            /* Fix for mobile hover states */
+            @media (hover: none) {
+                .category-btn:hover,
+                .server-ip:hover,
+                .skill-tag:hover,
+                .community-link:hover {
+                    transform: none;
+                }
+            }
+        }
+
+        /* Add specific iPad styles */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                max-width: 90%;
+            }
+
+            .categories {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1307,6 +1446,25 @@
                     loadingScreen.style.display = 'none';
                 }, 800);
             }, 10000);
+        });
+
+        // Add this touch event handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent default touch move behavior
+            document.addEventListener('touchmove', function(e) {
+                if (document.body.classList.contains('transitioning')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            // Handle iOS Safari height issues
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+            window.addEventListener('resize', () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            });
         });
     </script>
 </body>
