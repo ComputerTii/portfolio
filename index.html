@@ -1174,6 +1174,35 @@
             justify-content: center;
             position: relative;
         }
+
+        /* Adjust MCServerHost title specifically */
+        #mcserverhost .hero h1 {
+            font-size: 2.45rem; /* Reduced from 3.5rem */
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Move About me section up slightly */
+        #about {
+            height: calc(100vh - 70px);
+            margin-top: 60px; /* Reduced from 70px */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #about .hero {
+            transform: translateY(-20px); /* Move content up by 20px */
+        }
+
+        /* Keep other titles consistent */
+        #clublands .hero h1,
+        #about .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
